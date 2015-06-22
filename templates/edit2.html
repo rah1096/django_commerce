@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% block content %}
+
+  <div class="row">
+    <div class="span6 columns">
+    </div>
+  </div>
+  <div class="page-header">
+    <h1>Update your credit card information</h1>
+  </div>
+  <div class="row">
+    <div class="span6 columns">
+      <form id="user_form" accept-charset="UTF-8"  class="form-stacked" method="POST">
+
+          <label for="last_4_digits">Last 4</label>
+          <input id="digits" type="text" name="last_4_digits"/>
+
+          <label for="stripe_token">Stripe ID</label>
+          <input id="token" type="text" name="stripe_token"/>
+
+          <input id="submit" class="submit_class" type="button" value="Submit"/>
+      </form>
+    </div>
+
+  </div>
+      <div id="random_id" expanded="false" style="height:30px;width:80px">
+          click here
+      </div>
+<script>
+$(document).ready( function() {
+   $('#random_id').css('background-color','blue');
+   $('#random_id').css('color','white');
+});
+
+$('#random_id').on('click', function() {
+    $random_id = $('#random_id')
+    if($random_id.attr('expanded') == 'false')
+    {
+        $random_id.attr('expanded','true')
+        $random_id.css('background-color', 'green');
+        $random_id.css('height', "200px");
+        $('#submit').toggle()
+    }
+    else
+    {
+        $random_id.attr('expanded','false')
+        $random_id.css('background-color', 'blue');
+        $random_id.css('height', "30px");
+
+    }
+});
+
+
+//$('#random_id').on('click', function() {
+//    $random_id = $('#random_id')
+//    if($random_id.attr('expanded') == 'false')
+//    {
+//        $random_id.animate({
+//            height: '200px',
+//        }, 5000)
+//    }
+//    else
+//    {
+//
+//    }
+//});
+
+
+$('#submit').on('click', function() {
+
+   $.ajax({
+      url: '/edit2',
+      type: 'POST',
+      data: {
+        digits: $('#digits').val(),
+        token: $('#token').val(),
+      },
+      error: function(data) {
+        console.log("error")
+        console.log(data)
+      },
+      success: function(data) {
+        console.log("success")
+      }
+   });
+
+});
+</script>
+{% endblock %}

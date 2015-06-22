@@ -26,7 +26,8 @@ urlpatterns = [
     url(r'^sign_in$', views.sign_in, name='sign_in'),
     url(r'^sign_out$', views.sign_out, name='sign_out'),
     url(r'^register$', views.register, name='register'),
-    url(r'^edit$', views.edit, name='edit')
+    url(r'^edit$', views.edit, name='edit'),
+    url(r'^edit2$', views.edit2, name='edit2')
 
 ]
 
